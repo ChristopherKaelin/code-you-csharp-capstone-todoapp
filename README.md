@@ -47,7 +47,7 @@ A task management application built with ASP.NET Core Web API and a console clie
 
 ### AI Use (Code:You Policy)
 
-- [ ] All AI use cited per the Code:You AI policy
+- [x] All AI use cited per the Code:You AI policy
 
 ---
 
@@ -70,8 +70,13 @@ I hope to integrate this app into my Web Dev capstone, which was a calendar and 
 
 ### If you had more time, what would you have done differently or added?
 
+- I would have made a simple web interface
+- I would have spread the work out over a longer time frame instead of doing all the work in the last two weeks.
+
 ---
 
 ## AI Use Citations
 
-I fed the OpenClass text from the lessons that covered the final project, including the scoring rubric, to have AI generate the checklist and template to guide me as I wrote the project.
+- I fed the OpenClass text from the lessons that covered the final project, including the scoring rubric, to have AI generate the checklist and template to guide me as I wrote the project.
+
+- Had AI create a sample json file with 6 default todo items.
