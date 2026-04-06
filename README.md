@@ -8,37 +8,37 @@ A task management application built with ASP.NET Core Web API and a console clie
 
 ### Repository & Solution
 
-- [ ] GitHub repository created
-- [ ] `.gitignore` added
-- [ ] `.NET` solution file created
-- [ ] Web API project added to solution
-- [ ] Consuming project added to solution
-- [ ] Test project added to solution
+- [x] GitHub repository created
+- [x] `.gitignore` added
+- [x] `.NET` solution file created
+- [x] Web API project added to solution
+- [x] Consuming project added to solution
+- [x] Test project added to solution
 
 ### Web API
 
-- [ ] API builds successfully
-- [ ] CRUD endpoints implemented (Create, Read, Update, Delete)
-- [ ] Data stored in-memory
-- [ ] Swagger enabled
-- [ ] LINQ used for filtering/sorting
+- [x] API builds successfully
+- [x] CRUD endpoints implemented (Create, Read, Update, Delete)
+- [x] Data stored in-memory
+- [x] Swagger enabled
+- [x] LINQ used for filtering/sorting
 
 ### Consuming Project
 
-- [ ] Connects to Web API via `HttpClient`
-- [ ] Uses `async`/`await`
-- [ ] Supports all four CRUD operations
+- [x] Connects to Web API via `HttpClient`
+- [x] Uses `async`/`await`
+- [x] Supports all four CRUD operations
 
 ### Testing
 
-- [ ] xUnit test project created
+- [x] Unit test project created
 - [ ] Tests build without errors
 - [ ] Tests pass
 - [ ] Significant execution paths covered (including edge cases)
 
 ### README
 
-- [ ] App name and purpose documented
+- [x] App name and purpose documented
 - [ ] Build and run instructions included
 - [ ] Reflection questions answered
   - [ ] What did you learn from this project?
