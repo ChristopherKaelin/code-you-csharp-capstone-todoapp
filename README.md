@@ -32,9 +32,9 @@ A task management application built with ASP.NET Core Web API and a console clie
 ### Testing
 
 - [x] Unit test project created
-- [ ] Tests build without errors
-- [ ] Tests pass
-- [ ] Significant execution paths covered (including edge cases)
+- [x] Tests build without errors
+- [x] Tests pass
+- [x] Significant execution paths covered (including edge cases)
 
 ### README
 
@@ -80,3 +80,17 @@ I hope to integrate this app into my Web Dev capstone, which was a calendar and 
 - I fed the OpenClass text from the lessons that covered the final project, including the scoring rubric, to have AI generate the checklist and template to guide me as I wrote the project.
 
 - Had AI create a sample json file with 6 default todo items.
+
+- Needed AI to help debug an error with the second TodoController method, it had to be changed from
+
+  from: public TodoController(List<TodoItem> todos)
+
+  to: internal TodoController(List<TodoItem> todos)
+
+- Also required that this code be added to TodoApp.Api.csproj
+
+  \<ItemGroup>
+
+  \<InternalsVisibleTo Include="TodoApp.Tests" />
+
+  \</ItemGroup>

@@ -25,7 +25,7 @@ namespace TodoApp.Api.Controllers
             Todos = LoadTodos();
         }
 
-        public TodoController(List<TodoItem> todos)
+        internal TodoController(List<TodoItem> todos)
         {
             Todos = todos;
         }

@@ -71,6 +71,27 @@ async Task ListTodos()
 }
 
 //  List overdue todos
+// async Task ListOverdueTodos()
+// {
+//     var todoList = await RetrieveTodoList();
+
+//     var overdue = todoList?
+//         .Where(t => t.DueDate.HasValue && t.DueDate.Value < DateOnly.FromDateTime(DateTime.Today) && !t.IsComplete)
+//         .ToList();
+
+//     Console.WriteLine($"Overdue count: {overdue?.Count}");
+
+//     if (overdue == null || overdue.Count == 0)
+//     {
+//         Console.WriteLine("No overdue todos found.");
+//         return;
+//     }
+//     else
+//     {
+//         DisplayTodoList(overdue);
+//     }
+// }
+
 async Task ListOverdueTodos()
 {
     var todoList = await RetrieveTodoList();
@@ -84,9 +105,18 @@ async Task ListOverdueTodos()
         Console.WriteLine("No overdue todos found.");
         return;
     }
-    else
+
+    foreach (var todo in overdue)
     {
-        DisplayTodoList(overdue);
+        if (todo.ParentId.HasValue)
+        {
+            var parent = todoList?.FirstOrDefault(t => t.Id == todo.ParentId);
+            if (parent != null)
+                Console.WriteLine($"ID: {parent.Id} | {parent.Title} | Status: {(parent.IsComplete ? "Complete" : "Incomplete")}");
+        }
+
+        string indent = todo.ParentId.HasValue ? "  -> " : "";
+        Console.WriteLine($"{indent}ID: {todo.Id} | {todo.Title} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")} | Due: {todo.DueDate}");
     }
 }
 
@@ -264,7 +294,7 @@ void DisplaySubTodoList(List<TodoItem> todos)
 {
     foreach (var todo in todos)
     {
-        Console.WriteLine($"    ID: {todo.Id} | {todo.Title} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")}");
+        Console.WriteLine($"    ID: {todo.Id} | {todo.Title} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")} | Due: {todo.DueDate}");
     }
 }
 
