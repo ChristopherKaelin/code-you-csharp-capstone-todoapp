@@ -8,19 +8,26 @@ namespace TodoApp.Api.Controllers
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {
-        private List<TodoItem> Todos { get; } = new List<TodoItem>();
+        private List<TodoItem> Todos { get; set; } = new List<TodoItem>();
 
-        public TodoController()
+        public static List<TodoItem> LoadTodos()
         {
             string jsonFile = System.IO.File.ReadAllText("./Resources/todos.json");
             var todoData = JsonSerializer.Deserialize<List<TodoItem>>(
                 jsonFile,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            if (todoData != null)
-            {
-                Todos = todoData;
-            }
+            return todoData ?? new List<TodoItem>();
+        }
+
+        public TodoController()
+        {
+            Todos = LoadTodos();
+        }
+
+        public TodoController(List<TodoItem> todos)
+        {
+            Todos = todos;
         }
 
         // GET: api/todos
