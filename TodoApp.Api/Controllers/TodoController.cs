@@ -99,7 +99,8 @@ namespace TodoApp.Api.Controllers
 
         private void SaveTodos()
         {
-            System.IO.File.WriteAllText("./Resources/todos.json", JsonSerializer.Serialize(Todos));
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            System.IO.File.WriteAllText("./Resources/todos.json", JsonSerializer.Serialize(Todos, options));
         }
 
     }

@@ -32,7 +32,7 @@ while (true)
             await ListOverdueTodos();
             break;
         case "3":
-            await GetTodo();
+            await ListTodoItem();
             break;
         case "4":
             await CreateTodo();
@@ -57,30 +57,25 @@ while (true)
 //  List all todos
 async Task ListTodos()
 {
-    var response = await client.GetAsync("/api/todo");
-    var json = await response.Content.ReadAsStringAsync();
-    var todos = JsonSerializer.Deserialize<List<TodoItem>>(json, options);
+    var todoList = await RetrieveTodoList();
 
-    if (todos == null || todos.Count == 0)
+    if (todoList == null || todoList.Count == 0)
     {
         Console.WriteLine("No todos found.");
         return;
     }
-
-    foreach (var todo in todos)
+    else
     {
-        Console.WriteLine($"ID: {todo.Id} | {todo.Title} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")}");
+        DisplayTodoList(todoList);
     }
 }
 
 //  List overdue todos
 async Task ListOverdueTodos()
 {
-    var response = await client.GetAsync("/api/todo");
-    var json = await response.Content.ReadAsStringAsync();
-    var todos = JsonSerializer.Deserialize<List<TodoItem>>(json, options);
+    var todoList = await RetrieveTodoList();
 
-    var overdue = todos?
+    var overdue = todoList?
         .Where(t => t.DueDate.HasValue && t.DueDate.Value < DateOnly.FromDateTime(DateTime.Today) && !t.IsComplete)
         .ToList();
 
@@ -89,15 +84,14 @@ async Task ListOverdueTodos()
         Console.WriteLine("No overdue todos found.");
         return;
     }
-
-    foreach (var todo in overdue)
+    else
     {
-        Console.WriteLine($"ID: {todo.Id} | {todo.Title} | Due: {todo.DueDate?.ToString("yyyy-MM-dd")} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")}");
+        DisplayTodoList(overdue);
     }
 }
 
 //  Get todo by ID
-async Task GetTodo()
+async Task ListTodoItem()
 {
     await ListTodos();
     var id = PromptForId("Enter todo ID");
@@ -120,6 +114,15 @@ async Task GetTodo()
     Console.WriteLine($"  Due: {todo.DueDate?.ToString("yyyy-MM-dd") ?? "None"}");
     Console.WriteLine($"  Priority: {todo.Priority}");
     Console.WriteLine($"  Status: {(todo.IsComplete ? "Complete" : "Incomplete")}");
+
+    var allTodos = await RetrieveTodoList();
+    var children = allTodos?.Where(t => t.ParentId == id).ToList();
+
+    if (children != null && children.Count > 0)
+    {
+        Console.WriteLine("\n  Sub-tasks:");
+        DisplaySubTodoList(children);
+    }
 }
 
 //  Create todo
@@ -141,7 +144,7 @@ async Task CreateTodo()
 async Task CreateSubTodo()
 {
     await ListTodos();
-    var parentId = PromptForId("nEnter parent todo ID");
+    var parentId = PromptForId("Enter parent todo ID");
     if (parentId == null)
         return;
 
@@ -215,7 +218,7 @@ async Task UpdateTodo()
 async Task DeleteTodo()
 {
     await ListTodos();
-    var id = PromptForId("Enter todo ID to update");
+    var id = PromptForId("Enter todo ID to delete");
     if (id == null)
         return;
 
@@ -231,6 +234,38 @@ async Task DeleteTodo()
         Console.WriteLine("Todo deleted successfully.");
     else
         Console.WriteLine("Failed to delete todo.");
+}
+
+//  Retrieve complete list of todo items
+async Task<List<TodoItem>?> RetrieveTodoList()
+{
+    var response = await client.GetAsync("/api/todo");
+    var json = await response.Content.ReadAsStringAsync();
+    var todos = JsonSerializer.Deserialize<List<TodoItem>>(json, options);
+
+    return todos;
+}
+
+//  Display list of todo items
+void DisplayTodoList(List<TodoItem> todos)
+{
+    var parents = todos.Where(t => t.ParentId == null).ToList();
+
+    foreach (var todo in parents)
+    {
+        bool hasChildren = todos.Any(t => t.ParentId == todo.Id);
+        string childIndicator = hasChildren ? "[+]" : "";
+        Console.WriteLine($"ID: {todo.Id} {childIndicator} | {todo.Title} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")}");
+    }
+}
+
+//  Display list of sub todo items
+void DisplaySubTodoList(List<TodoItem> todos)
+{
+    foreach (var todo in todos)
+    {
+        Console.WriteLine($"    ID: {todo.Id} | {todo.Title} | Status: {(todo.IsComplete ? "Complete" : "Incomplete")}");
+    }
 }
 
 //  Prompts the user for todo details and returns a new TodoItem.
@@ -271,7 +306,7 @@ int? PromptForId(string prompt)
 {
     while (true)
     {
-        Console.Write($"\n{prompt} (0 to exit): ");
+        Console.Write($"\n{prompt} (0 to cancel): ");
         var input = Console.ReadLine();
 
         if (!int.TryParse(input, out int id))

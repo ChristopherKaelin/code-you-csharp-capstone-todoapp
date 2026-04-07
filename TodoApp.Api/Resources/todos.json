@@ -1,6 +1,92 @@
-[{"Id":1,"Title":"Todo with no due date (priority 2)","Description":null,"IsComplete":false,"DueDate":null,"Priority":2,"ParentId":null},
-{"Id":2,"Title":"Todo due today","Description":null,"IsComplete":false,"DueDate":"2026-04-04","Priority":3,"ParentId":null},
-{"Id":3,"Title":"Todo with no due date (priority 1)","Description":null,"IsComplete":false,"DueDate":null,"Priority":1,"ParentId":null},
-{"Id":6,"Title":"Todo with no due date (priority 2)","Description":null,"IsComplete":false,"DueDate":null,"Priority":2,"ParentId":null},
-{"Id":7,"Title":"Code:You Capstone","Description":"Software Dev with C# Capstone Project","IsComplete":true,"DueDate":"2026-04-10","Priority":1,"ParentId":0},
-{"Id":8,"Title":"Mentor Huddle","Description":"Huddle between the all the mentors for all the classes.","IsComplete":true,"DueDate":"2026-04-03","Priority":1,"ParentId":0}]
+[
+  {
+    "Id": 1,
+    "Title": "Todo with no due date (priority 2)",
+    "Description": null,
+    "IsComplete": false,
+    "DueDate": null,
+    "Priority": 2,
+    "ParentId": null
+  },
+  {
+    "Id": 2,
+    "Title": "Todo due today",
+    "Description": null,
+    "IsComplete": false,
+    "DueDate": "2026-04-04",
+    "Priority": 3,
+    "ParentId": null
+  },
+  {
+    "Id": 3,
+    "Title": "Todo with no due date (priority 1)",
+    "Description": null,
+    "IsComplete": false,
+    "DueDate": null,
+    "Priority": 1,
+    "ParentId": null
+  },
+  {
+    "Id": 6,
+    "Title": "Todo with no due date (priority 2)",
+    "Description": null,
+    "IsComplete": false,
+    "DueDate": null,
+    "Priority": 2,
+    "ParentId": null
+  },
+  {
+    "Id": 7,
+    "Title": "Code:You Capstone",
+    "Description": "Software Dev with C# Capstone Project",
+    "IsComplete": false,
+    "DueDate": "2026-04-10",
+    "Priority": 1,
+    "ParentId": null
+  },
+  {
+    "Id": 8,
+    "Title": "Mentor Huddle",
+    "Description": "Huddle between the all the mentors for all the classes.",
+    "IsComplete": true,
+    "DueDate": "2026-04-07",
+    "Priority": 2,
+    "ParentId": null
+  },
+  {
+    "Id": 9,
+    "Title": "Code Unit Tests",
+    "Description": "Software Dev with C# Capstone Project",
+    "IsComplete": false,
+    "DueDate": "2026-04-10",
+    "Priority": 1,
+    "ParentId": 7
+  },
+  {
+    "Id": 10,
+    "Title": "Get Eggs",
+    "Description": "Go to publix and purchase eggs",
+    "IsComplete": false,
+    "DueDate": null,
+    "Priority": 2,
+    "ParentId": null
+  },
+  {
+    "Id": 11,
+    "Title": "Update README",
+    "Description": "update my capstone project readme file",
+    "IsComplete": false,
+    "DueDate": "2026-04-06",
+    "Priority": 1,
+    "ParentId": 7
+  },
+  {
+    "Id": 12,
+    "Title": "Run Tests",
+    "Description": "after building the test, need to run them",
+    "IsComplete": false,
+    "DueDate": "2026-04-07",
+    "Priority": 2,
+    "ParentId": 7
+  }
+]
