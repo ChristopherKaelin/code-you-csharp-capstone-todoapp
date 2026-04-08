@@ -19,7 +19,7 @@ A task management application built with ASP.NET Core Web API and a console clie
 
 - [x] API builds successfully
 - [x] CRUD endpoints implemented (Create, Read, Update, Delete)
-- [x] Data stored in-memory
+- [x] Data stored in-memory and persisted in todos.json
 - [x] Swagger enabled
 - [x] LINQ used for filtering/sorting
 
@@ -39,11 +39,11 @@ A task management application built with ASP.NET Core Web API and a console clie
 ### README
 
 - [x] App name and purpose documented
-- [ ] Build and run instructions included
-- [ ] Reflection questions answered
-  - [ ] What did you learn from this project?
-  - [ ] What did you learn from this course?
-  - [ ] What would you have done differently or added with more time?
+- [x] Build and run instructions included
+- [x] Reflection questions answered
+  - [x] What did you learn from this project?
+  - [x] What did you learn from this course?
+  - [x] What would you have done differently or added with more time?
 
 ### AI Use (Code:You Policy)
 
@@ -60,18 +60,59 @@ I hope to integrate this app into my Web Dev capstone, which was a calendar and 
 
 ## How to Build and Run
 
+### Prerequisites
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- [VS Code](https://code.visualstudio.com/)
+
+### Steps
+
+1. Clone or download the repository from GitHub
+2. Open VS Code, select **File → Open Folder**, navigate to the downloaded `code-you-csharp-capstone-todoapp` folder, and click **Select Folder**
+3. Open a terminal in VS Code and navigate to the API project:
+
+   ```
+    a. cd TodoApp.Api
+    b. dotnet run
+   ```
+
+4. Open a second terminal and run the tests from the solution root:
+
+   ```
+    a. dotnet test
+   ```
+
+5. Once tests pass, navigate to the console project and start it:
+
+   ```
+    a. cd TodoApp.Console
+    b. dotnet run
+   ```
+
+6. The console menu will guide you through all available operations
+
+> **Note:** The API must be running before starting the console app. Swagger is available at `http://localhost:1221/swagger` while the API is running.
+
 ---
 
 ## Reflection
 
 ### What did you learn from this project?
 
+Building an API was not as hard as I expected going into this project — I always assumed they were
+far more complex than they turned out to be. This project also reinforced that simple solutions can
+still be effective at accomplishing what you set out to do.
+
 ### What did you learn from this course?
+
+Many of the principles I learned here, like DRY, overlap with what I learned in the Web Dev track.
+The difference is that these principles are now part of my thinking from the beginning of a project
+rather than something I apply after the fact.
 
 ### If you had more time, what would you have done differently or added?
 
-- I would have made a simple web interface
-- I would have spread the work out over a longer time frame instead of doing all the work in the last two weeks.
+- I would have built a simple web interface in addition to the console app
+- I would have spread the work out over a longer time frame instead of doing it all in the last two weeks
 
 ---
 
@@ -83,14 +124,14 @@ I hope to integrate this app into my Web Dev capstone, which was a calendar and 
 
 - Needed AI to help debug an error with the second TodoController method, it had to be changed from
 
-  from: public TodoController(List<TodoItem> todos)
+  from: `public TodoController(List<TodoItem> todos) `
 
-  to: internal TodoController(List<TodoItem> todos)
+  to: `internal TodoController(List<TodoItem> todos)`
 
-- Also required that this code be added to TodoApp.Api.csproj
+- that fix also required that this code be added to `TodoApp.Api.csproj`
 
-  \<ItemGroup>
-
-  \<InternalsVisibleTo Include="TodoApp.Tests" />
-
-  \</ItemGroup>
+  ```xml
+  <ItemGroup>
+    <InternalsVisibleTo Include="TodoApp.Tests" />
+  </ItemGroup>
+  ```
